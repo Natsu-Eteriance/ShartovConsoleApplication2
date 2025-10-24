@@ -1,0 +1,18 @@
+package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func longOperation() {
+    fmt.Println("Начало операции...")
+    time.Sleep(5 * time.Second)
+    fmt.Println("Операция завершена")
+}
+
+func main() {
+    go longOperation()
+    time.Sleep(2 * time.Second)
+    fmt.Println("Пользователь отменил операцию")
+}
