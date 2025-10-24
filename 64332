@@ -1,0 +1,26 @@
+package main
+
+import (
+    "context"
+    "fmt"
+    "net/http"
+    "time"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    fmt.Println("Начинаем обработку запроса...")
+    select {
+    case <-time.After(5 * time.Second):
+        fmt.Fprintln(w, "Обработка завершена!")
+    case <-ctx.Done():
+        fmt.Println("Запрос отменён:", ctx.Err())
+    }
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    fmt.Println("Сервер запущен на :8080")
+    http.ListenAndServe(":8080", nil)
+}
