@@ -1,0 +1,17 @@
+package main
+
+import (
+    "context"
+    "fmt"
+)
+
+func process(ctx context.Context) {
+    fmt.Println("Получен контекст:", ctx)
+}
+
+func main() {
+    ctx1 := context.Background()
+    ctx2 := context.TODO()
+    process(ctx1)
+    process(ctx2)
+}
